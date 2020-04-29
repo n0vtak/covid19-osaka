@@ -95,12 +95,26 @@ export default {
       const lastDayBefore = this.chartData.slice(-2)[0].transition
       return this.formatDayBeforeRatio(lastDay - lastDayBefore)
     },
+    displayWeeklyRatio() {
+      const lastDay = this.chartData.slice(-1)[0].weekly
+      const lastDayBefore = this.chartData.slice(-2)[0].weekly
+      return this.formatDayBeforeRatio(lastDay - lastDayBefore)
+    },
     displayInfo() {
       if (this.dataKind === 'transition') {
         return {
           lText: `${this.chartData.slice(-1)[0].transition.toLocaleString()}`,
           sText: `${this.$t('実績値')}（${this.$t('前日比')}：${
             this.displayTransitionRatio
+          } ${this.unit}）`,
+          unit: this.unit
+        }
+      }
+      if (this.dataKind === 'weekly') {
+        return {
+          lText: `${this.chartData.slice(-1)[0].weekly.toLocaleString()}`,
+          sText: `${this.$t('７日計')}（${this.$t('前日比')}：${
+            this.displayWeeklyRatio
           } ${this.unit}）`,
           unit: this.unit
         }
@@ -128,6 +142,23 @@ export default {
               label: this.dataKind,
               data: this.chartData.map(d => {
                 return d.transition
+              }),
+              backgroundColor: '#2445b5',
+              borderWidth: 0
+            }
+          ]
+        }
+      }
+      if (this.dataKind === 'weekly') {
+        return {
+          labels: this.chartData.map(d => {
+            return d.label
+          }),
+          datasets: [
+            {
+              label: this.dataKind,
+              data: this.chartData.map(d => {
+                return d.weekly
               }),
               backgroundColor: '#2445b5',
               borderWidth: 0
@@ -265,7 +296,11 @@ export default {
     scaledTicksYAxisMax() {
       const yAxisMax = 1.2
       const dataKind =
-        this.dataKind === 'transition' ? 'transition' : 'cumulative'
+        this.dataKind === 'transition'
+          ? 'transition'
+          : this.dataKind === 'transition'
+          ? 'cumulative'
+          : 'weekly'
       const values = this.chartData.map(d => d[dataKind])
       return Math.max(...values) * yAxisMax
     }

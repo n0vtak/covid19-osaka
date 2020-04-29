@@ -87,7 +87,7 @@ def get_xlsx(url: str, filename: str) -> openpyxl.workbook.workbook.Workbook:
 
 
 def dumps_json(file_name: str, json_data: Dict) -> None:
-    with codecs.open("./data/" + file_name, "w", "utf-8") as f:
+    with codecs.open("./data/dumped_" + file_name, "w", "utf-8") as f:
         f.write(dumps(json_data, ensure_ascii=False, indent=4, separators=(',', ': ')))
 
 

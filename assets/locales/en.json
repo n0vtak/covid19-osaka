@@ -142,6 +142,7 @@
   "退院": "Discharged",
   "日別": "By day",
   "累計": "Total",
+  "7日計": "7-day",
   "※退院には、死亡退院を含む": "* The discharged includes deaths",
   "{date} 更新": " Last update: {date}",
   "オープンデータを入手": " Get Open Data",

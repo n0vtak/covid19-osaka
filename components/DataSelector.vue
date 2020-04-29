@@ -11,6 +11,9 @@
     <v-btn v-ripple="false" value="cumulative" class="DataSelector-Button">
       {{ $t('累計') }}
     </v-btn>
+    <v-btn v-ripple="false" value="weekly" class="DataSelector-Button">
+      {{ $t('7日計') }}
+    </v-btn>
   </v-btn-toggle>
 </template>
 
